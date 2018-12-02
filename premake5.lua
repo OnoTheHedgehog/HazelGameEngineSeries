@@ -1,7 +1,7 @@
 workspace "Hazel"
 
 architecture "x86_64"
-
+require "export-compile-commands"
 
 configurations
 {
@@ -17,6 +17,7 @@ project "Sandbox"
 location "Sandbox"
 kind "ConsoleApp"
 language "C++"
+cppdialect "C++17"
 
 targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -29,7 +30,7 @@ files
 
 includedirs
 {
-   "Hazel/vendor/spdlog/include"
+   "Hazel/vendor/spdlog/include",
    "Hazel/src"
 }
 
@@ -39,7 +40,6 @@ links
 }
 
 filter "system:windows"
-cppdialect "C++17"
 staticruntime "On"
 systemversion "latest"
 
@@ -67,6 +67,7 @@ project "Hazel"
 location "Hazel"
 kind "SharedLib"
 language "C++"
+cppdialect "C++17"
 
 targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -79,7 +80,8 @@ files
 
 includedirs
 {
-   "Hazel/vendor/spdlog/include"
+   "%{prj.name}/src",
+   "%{prj.name}/vendor/spdlog/include"
 }
 
 postbuildcommands
