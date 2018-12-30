@@ -23,9 +23,11 @@ ifeq ($(config),debug)
   TARGETDIR = ../bin/Debug-macosx-x86_64/Sandbox
   TARGET = $(TARGETDIR)/Sandbox
   OBJDIR = ../bin-int/Debug-macosx-x86_64/Sandbox
+  PCH = ../Hazel/src/hzpch.hpp
+  GCH = $(OBJDIR)/$(notdir $(PCH)).gch
   DEFINES += -DHZ_DEBUG
   INCLUDES += -I../Hazel/vendor/spdlog/include -I../Hazel/src
-  FORCE_INCLUDE +=
+  FORCE_INCLUDE += -include $(OBJDIR)/$(notdir $(PCH))
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -g
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -g -std=c++17
@@ -58,9 +60,11 @@ ifeq ($(config),release)
   TARGETDIR = ../bin/Release-macosx-x86_64/Sandbox
   TARGET = $(TARGETDIR)/Sandbox
   OBJDIR = ../bin-int/Release-macosx-x86_64/Sandbox
+  PCH = ../Hazel/src/hzpch.hpp
+  GCH = $(OBJDIR)/$(notdir $(PCH)).gch
   DEFINES += -DHZ_RELEASE
   INCLUDES += -I../Hazel/vendor/spdlog/include -I../Hazel/src
-  FORCE_INCLUDE +=
+  FORCE_INCLUDE += -include $(OBJDIR)/$(notdir $(PCH))
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -O2
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -O2 -std=c++17
@@ -93,9 +97,11 @@ ifeq ($(config),dist)
   TARGETDIR = ../bin/Dist-macosx-x86_64/Sandbox
   TARGET = $(TARGETDIR)/Sandbox
   OBJDIR = ../bin-int/Dist-macosx-x86_64/Sandbox
+  PCH = ../Hazel/src/hzpch.hpp
+  GCH = $(OBJDIR)/$(notdir $(PCH)).gch
   DEFINES += -DHZ_DIST
   INCLUDES += -I../Hazel/vendor/spdlog/include -I../Hazel/src
-  FORCE_INCLUDE +=
+  FORCE_INCLUDE += -include $(OBJDIR)/$(notdir $(PCH))
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -O2
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -O2 -std=c++17

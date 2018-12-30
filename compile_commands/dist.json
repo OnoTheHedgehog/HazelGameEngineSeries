@@ -8,18 +8,18 @@
           {
             "directory": "/Users/onome.oyibo/C++Stuff/gitProjects/HazelGameEngineSeries/Hazel",
             "file": "/Users/onome.oyibo/C++Stuff/gitProjects/HazelGameEngineSeries/Hazel/src/Hazel/Application.cpp",
-            "command": "cc -MMD -MP -DHZ_DIST -I/Users/onome.oyibo/C++Stuff/gitProjects/HazelGameEngineSeries/Hazel/vendor/spdlog/include -m64 -O2 -fPIC -o /Users/onome.oyibo/C++Stuff/gitProjects/HazelGameEngineSeries/bin-int/Dist-macosx-x86_64/Hazel/Application.o -MF /Users/onome.oyibo/C++Stuff/gitProjects/HazelGameEngineSeries/bin-int/Dist-macosx-x86_64/Hazel/Application.d -c /Users/onome.oyibo/C++Stuff/gitProjects/HazelGameEngineSeries/Hazel/src/Hazel/Application.cpp"
+            "command": "cc -MMD -MP -DHZ_DIST -I/Users/onome.oyibo/C++Stuff/gitProjects/HazelGameEngineSeries/Hazel/src -I/Users/onome.oyibo/C++Stuff/gitProjects/HazelGameEngineSeries/Hazel/vendor/spdlog/include -m64 -O2 -fPIC -o /Users/onome.oyibo/C++Stuff/gitProjects/HazelGameEngineSeries/bin-int/Dist-macosx-x86_64/Hazel/Application.o -MF /Users/onome.oyibo/C++Stuff/gitProjects/HazelGameEngineSeries/bin-int/Dist-macosx-x86_64/Hazel/Application.d -c /Users/onome.oyibo/C++Stuff/gitProjects/HazelGameEngineSeries/Hazel/src/Hazel/Application.cpp"
           }
 ,
           {
             "directory": "/Users/onome.oyibo/C++Stuff/gitProjects/HazelGameEngineSeries/Hazel",
             "file": "/Users/onome.oyibo/C++Stuff/gitProjects/HazelGameEngineSeries/Hazel/src/Hazel/Log.cpp",
-            "command": "cc -MMD -MP -DHZ_DIST -I/Users/onome.oyibo/C++Stuff/gitProjects/HazelGameEngineSeries/Hazel/vendor/spdlog/include -m64 -O2 -fPIC -o /Users/onome.oyibo/C++Stuff/gitProjects/HazelGameEngineSeries/bin-int/Dist-macosx-x86_64/Hazel/Log.o -MF /Users/onome.oyibo/C++Stuff/gitProjects/HazelGameEngineSeries/bin-int/Dist-macosx-x86_64/Hazel/Log.d -c /Users/onome.oyibo/C++Stuff/gitProjects/HazelGameEngineSeries/Hazel/src/Hazel/Log.cpp"
+            "command": "cc -MMD -MP -DHZ_DIST -I/Users/onome.oyibo/C++Stuff/gitProjects/HazelGameEngineSeries/Hazel/src -I/Users/onome.oyibo/C++Stuff/gitProjects/HazelGameEngineSeries/Hazel/vendor/spdlog/include -m64 -O2 -fPIC -o /Users/onome.oyibo/C++Stuff/gitProjects/HazelGameEngineSeries/bin-int/Dist-macosx-x86_64/Hazel/Log.o -MF /Users/onome.oyibo/C++Stuff/gitProjects/HazelGameEngineSeries/bin-int/Dist-macosx-x86_64/Hazel/Log.d -c /Users/onome.oyibo/C++Stuff/gitProjects/HazelGameEngineSeries/Hazel/src/Hazel/Log.cpp"
           }
 ,
           {
             "directory": "/Users/onome.oyibo/C++Stuff/gitProjects/HazelGameEngineSeries/Hazel",
             "file": "/Users/onome.oyibo/C++Stuff/gitProjects/HazelGameEngineSeries/Hazel/src/test.cpp",
-            "command": "cc -MMD -MP -DHZ_DIST -I/Users/onome.oyibo/C++Stuff/gitProjects/HazelGameEngineSeries/Hazel/vendor/spdlog/include -m64 -O2 -fPIC -o /Users/onome.oyibo/C++Stuff/gitProjects/HazelGameEngineSeries/bin-int/Dist-macosx-x86_64/Hazel/test.o -MF /Users/onome.oyibo/C++Stuff/gitProjects/HazelGameEngineSeries/bin-int/Dist-macosx-x86_64/Hazel/test.d -c /Users/onome.oyibo/C++Stuff/gitProjects/HazelGameEngineSeries/Hazel/src/test.cpp"
+            "command": "cc -MMD -MP -DHZ_DIST -I/Users/onome.oyibo/C++Stuff/gitProjects/HazelGameEngineSeries/Hazel/src -I/Users/onome.oyibo/C++Stuff/gitProjects/HazelGameEngineSeries/Hazel/vendor/spdlog/include -m64 -O2 -fPIC -o /Users/onome.oyibo/C++Stuff/gitProjects/HazelGameEngineSeries/bin-int/Dist-macosx-x86_64/Hazel/test.o -MF /Users/onome.oyibo/C++Stuff/gitProjects/HazelGameEngineSeries/bin-int/Dist-macosx-x86_64/Hazel/test.d -c /Users/onome.oyibo/C++Stuff/gitProjects/HazelGameEngineSeries/Hazel/src/test.cpp"
           }
 ]

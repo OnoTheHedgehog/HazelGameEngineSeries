@@ -12,6 +12,11 @@ configurations
 
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
+-- Include directories relaticve to the root folder (solution directory)
+IncludeDir = {}
+IncludeDir["GLFW"] = "Hazel/vendor/GLFW/include" -- sets the include for pglfw in a struct
+
+include "Hazel/vendor/GLFW" -- includes premake file in GLFW
 
 project "Sandbox"
 location "Sandbox"
@@ -21,6 +26,8 @@ cppdialect "C++17"
 
 targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
+
+pchheader "hzpch.hpp"		
 
 files
 {
@@ -75,13 +82,23 @@ objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 files
 {
    "%{prj.name}/src/**.h",
-   "%{prj.name}/src/**.cpp",
+   "%{prj.name}/src/**.cpp"
 }
 
 includedirs
 {
    "%{prj.name}/src",
-   "%{prj.name}/vendor/spdlog/include"
+   "%{prj.name}/vendor/spdlog/include",
+   "%{IncludeDir.GLFW}"
+}
+
+links
+{
+   "GLFW",
+   "Cocoa.framework",
+   "CoreVideo.framework",
+   "OpenGL.framework",
+   "IOKit.framework",
 }
 
 postbuildcommands

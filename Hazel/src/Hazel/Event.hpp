@@ -3,9 +3,6 @@
 #include "core.hpp"
 
 
-#include <string>
-#include <functional>
-
 namespace Hazel {
 
   enum class EventType {

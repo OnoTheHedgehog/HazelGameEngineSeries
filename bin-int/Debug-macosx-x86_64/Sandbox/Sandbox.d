@@ -1,5 +1,9 @@
-../bin-int/Debug-macosx-x86_64/Sandbox/Sandbox.o: src/Sandbox.cpp \
-  ../Hazel/src/Hazel.h ../Hazel/src/Hazel/Application.hpp \
+../bin-int/Debug-macosx-x86_64/Sandbox/Sandbox.o: \
+  /Users/onome.oyibo/C++Stuff/gitProjects/HazelGameEngineSeries/Sandbox/../Hazel/src/hzpch.hpp \
+  src/Sandbox.cpp ../Hazel/src/Hazel.h \
+  ../Hazel/src/Hazel/Application.hpp ../Hazel/src/Hazel/Window.hpp \
+  ../Hazel/src/hzpch.hpp ../Hazel/src/Hazel/core.hpp \
+  ../Hazel/src/Hazel/Event.hpp ../Hazel/src/Hazel/ApplicationEvent.hpp \
   ../Hazel/src/Hazel/Log.hpp \
   ../Hazel/vendor/spdlog/include/spdlog/spdlog.h \
   ../Hazel/vendor/spdlog/include/spdlog/common.h \
@@ -28,9 +32,21 @@
   ../Hazel/vendor/spdlog/include/spdlog/fmt/bundled/ostream.h \
   ../Hazel/src/Hazel/EntryPoint.hpp
 
+src/Sandbox.cpp:
+
 ../Hazel/src/Hazel.h:
 
 ../Hazel/src/Hazel/Application.hpp:
+
+../Hazel/src/Hazel/Window.hpp:
+
+../Hazel/src/hzpch.hpp:
+
+../Hazel/src/Hazel/core.hpp:
+
+../Hazel/src/Hazel/Event.hpp:
+
+../Hazel/src/Hazel/ApplicationEvent.hpp:
 
 ../Hazel/src/Hazel/Log.hpp:
 

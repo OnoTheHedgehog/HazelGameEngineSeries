@@ -24,14 +24,14 @@ ifeq ($(config),debug)
   TARGET = $(TARGETDIR)/libHazel.dylib
   OBJDIR = ../bin-int/Debug-macosx-x86_64/Hazel
   DEFINES += -DHZ_DEBUG
-  INCLUDES += -Isrc -Ivendor/spdlog/include
+  INCLUDES += -Isrc -Ivendor/spdlog/include -Ivendor/GLFW/include
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -fPIC -g
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -fPIC -g -std=c++17
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  LIBS +=
-  LDDEPS +=
+  LIBS += vendor/GLFW/bin-int/Debug-macosx-x86_64/GLFW/libGLFW.a -framework Cocoa -framework CoreVideo -framework OpenGL -framework IOKit
+  LDDEPS += vendor/GLFW/bin-int/Debug-macosx-x86_64/GLFW/libGLFW.a
   ALL_LDFLAGS += $(LDFLAGS) -m64 -dynamiclib -Wl,-install_name,@rpath/libHazel.dylib
   LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
   define PREBUILDCMDS
@@ -61,14 +61,14 @@ ifeq ($(config),release)
   TARGET = $(TARGETDIR)/libHazel.dylib
   OBJDIR = ../bin-int/Release-macosx-x86_64/Hazel
   DEFINES += -DHZ_RELEASE
-  INCLUDES += -Isrc -Ivendor/spdlog/include
+  INCLUDES += -Isrc -Ivendor/spdlog/include -Ivendor/GLFW/include
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -O2 -fPIC
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -O2 -fPIC -std=c++17
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  LIBS +=
-  LDDEPS +=
+  LIBS += vendor/GLFW/bin-int/Release-macosx-x86_64/GLFW/libGLFW.a -framework Cocoa -framework CoreVideo -framework OpenGL -framework IOKit
+  LDDEPS += vendor/GLFW/bin-int/Release-macosx-x86_64/GLFW/libGLFW.a
   ALL_LDFLAGS += $(LDFLAGS) -m64 -dynamiclib -Wl,-install_name,@rpath/libHazel.dylib
   LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
   define PREBUILDCMDS
@@ -98,14 +98,14 @@ ifeq ($(config),dist)
   TARGET = $(TARGETDIR)/libHazel.dylib
   OBJDIR = ../bin-int/Dist-macosx-x86_64/Hazel
   DEFINES += -DHZ_DIST
-  INCLUDES += -Isrc -Ivendor/spdlog/include
+  INCLUDES += -Isrc -Ivendor/spdlog/include -Ivendor/GLFW/include
   FORCE_INCLUDE +=
   ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
   ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -O2 -fPIC
   ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -O2 -fPIC -std=c++17
   ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-  LIBS +=
-  LDDEPS +=
+  LIBS += vendor/GLFW/bin-int/Dist-macosx-x86_64/GLFW/libGLFW.a -framework Cocoa -framework CoreVideo -framework OpenGL -framework IOKit
+  LDDEPS += vendor/GLFW/bin-int/Dist-macosx-x86_64/GLFW/libGLFW.a
   ALL_LDFLAGS += $(LDFLAGS) -m64 -dynamiclib -Wl,-install_name,@rpath/libHazel.dylib
   LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
   define PREBUILDCMDS
@@ -124,6 +124,7 @@ endif
 OBJECTS := \
 	$(OBJDIR)/Application.o \
 	$(OBJDIR)/Log.o \
+	$(OBJDIR)/MacWindow.o \
 	$(OBJDIR)/test.o \
 
 RESOURCES := \
@@ -187,6 +188,9 @@ $(OBJDIR)/Application.o: src/Hazel/Application.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/Log.o: src/Hazel/Log.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/MacWindow.o: src/Hazel/Platforms/MacWindow.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/test.o: src/test.cpp

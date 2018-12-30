@@ -1,7 +1,8 @@
 ../bin-int/Debug-macosx-x86_64/Hazel/Application.o: \
-  src/Hazel/Application.cpp src/Hazel/Application.hpp \
-  src/Hazel/ApplicationEvent.hpp src/Hazel/Event.hpp src/Hazel/core.hpp \
-  src/Hazel/Log.hpp vendor/spdlog/include/spdlog/spdlog.h \
+  src/Hazel/Application.cpp src/hzpch.hpp src/Hazel/Application.hpp \
+  src/Hazel/Window.hpp src/Hazel/core.hpp src/Hazel/Event.hpp \
+  src/Hazel/ApplicationEvent.hpp src/Hazel/Log.hpp \
+  vendor/spdlog/include/spdlog/spdlog.h \
   vendor/spdlog/include/spdlog/common.h \
   vendor/spdlog/include/spdlog/tweakme.h \
   vendor/spdlog/include/spdlog/details/null_mutex.h \
@@ -25,15 +26,20 @@
   vendor/spdlog/include/spdlog/version.h \
   vendor/spdlog/include/spdlog/sinks/stdout_color_sinks.h \
   vendor/spdlog/include/spdlog/fmt/ostr.h \
-  vendor/spdlog/include/spdlog/fmt/bundled/ostream.h
+  vendor/spdlog/include/spdlog/fmt/bundled/ostream.h \
+  vendor/GLFW/include/GLFW/glfw3.h
+
+src/hzpch.hpp:
 
 src/Hazel/Application.hpp:
 
-src/Hazel/ApplicationEvent.hpp:
+src/Hazel/Window.hpp:
+
+src/Hazel/core.hpp:
 
 src/Hazel/Event.hpp:
 
-src/Hazel/core.hpp:
+src/Hazel/ApplicationEvent.hpp:
 
 src/Hazel/Log.hpp:
 
@@ -86,3 +92,5 @@ vendor/spdlog/include/spdlog/sinks/stdout_color_sinks.h:
 vendor/spdlog/include/spdlog/fmt/ostr.h:
 
 vendor/spdlog/include/spdlog/fmt/bundled/ostream.h:
+
+vendor/GLFW/include/GLFW/glfw3.h:

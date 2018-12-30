@@ -2,8 +2,6 @@
 
 #include "Event.hpp"
 
-#include <sstream>
-
 namespace Hazel {
 
   class MouseMovedEvent : public Event {

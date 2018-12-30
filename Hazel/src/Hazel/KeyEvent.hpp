@@ -1,8 +1,6 @@
 #pragma once
 
-#include "Event.hpp"
-
-#include <sstream>
+#include "Hazel/Event.hpp"
 
 namespace Hazel {
 
@@ -15,9 +13,7 @@ namespace Hazel {
   protected:
     KeyEvent(int keycode)
       : m_KeyCode(keycode){
-    }
-    
-    
+    }   
     int m_KeyCode;
   };
 
