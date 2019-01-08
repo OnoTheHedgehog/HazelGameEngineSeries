@@ -3,7 +3,8 @@
   src/Sandbox.cpp ../Hazel/src/Hazel.h \
   ../Hazel/src/Hazel/Application.hpp ../Hazel/src/Hazel/Window.hpp \
   ../Hazel/src/hzpch.hpp ../Hazel/src/Hazel/core.hpp \
-  ../Hazel/src/Hazel/Event.hpp ../Hazel/src/Hazel/ApplicationEvent.hpp \
+  ../Hazel/src/Hazel/Event.hpp ../Hazel/src/Hazel/layerStack.hpp \
+  ../Hazel/src/Hazel/layer.hpp ../Hazel/src/Hazel/ApplicationEvent.hpp \
   ../Hazel/src/Hazel/Log.hpp \
   ../Hazel/vendor/spdlog/include/spdlog/spdlog.h \
   ../Hazel/vendor/spdlog/include/spdlog/common.h \
@@ -45,6 +46,10 @@ src/Sandbox.cpp:
 ../Hazel/src/Hazel/core.hpp:
 
 ../Hazel/src/Hazel/Event.hpp:
+
+../Hazel/src/Hazel/layerStack.hpp:
+
+../Hazel/src/Hazel/layer.hpp:
 
 ../Hazel/src/Hazel/ApplicationEvent.hpp:
 

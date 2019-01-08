@@ -15,8 +15,10 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 -- Include directories relaticve to the root folder (solution directory)
 IncludeDir = {}
 IncludeDir["GLFW"] = "Hazel/vendor/GLFW/include" -- sets the include for pglfw in a struct
+IncludeDir["Glad"] = "Hazel/vendor/Glad/include" -- sets the include for pglfw in a struct
 
 include "Hazel/vendor/GLFW" -- includes premake file in GLFW
+include "Hazel/vendor/Glad" -- includes premake file in GLFW
 
 project "Sandbox"
 location "Sandbox"
@@ -89,12 +91,14 @@ includedirs
 {
    "%{prj.name}/src",
    "%{prj.name}/vendor/spdlog/include",
-   "%{IncludeDir.GLFW}"
+   "%{IncludeDir.GLFW}",
+   "%{IncludeDir.Glad}"
 }
 
 links
 {
    "GLFW",
+   "Glad",
    "Cocoa.framework",
    "CoreVideo.framework",
    "OpenGL.framework",
@@ -105,6 +109,24 @@ postbuildcommands
 {
   ("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox/%{cfg.buildtarget.name}")
 }
+
+defines
+{
+   "GLFW_INCLUDE_NONE"
+}
+
+
+filter "configurations:Debug"
+defines { "HZ_DEBUG" }
+symbols "On"
+
+filter "configurations:Release"
+defines { "HZ_RELEASE" }
+optimize "On"
+
+filter "configurations:Dist"
+defines { "HZ_DIST" }
+optimize "On"
 
 filter "system:windows"
 cppdialect "C++17"
@@ -119,17 +141,7 @@ defines
 
 
 
-filter "configurations:Debug"
-defines { "HZ_DEBUG" }
-symbols "On"
 
-filter "configurations:Release"
-defines { "HZ_RELEASE" }
-optimize "On"
-
-filter "configurations:Dist"
-defines { "HZ_DIST" }
-optimize "On"
 
 
 
