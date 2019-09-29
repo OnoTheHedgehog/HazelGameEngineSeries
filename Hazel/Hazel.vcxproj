@@ -66,6 +66,7 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <PreprocessorDefinitions>HZ_PLATFORM_WINDOWS;HZ_BUILD_DLL;_WINDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -74,9 +75,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Hazel.h" />
+    <ClInclude Include="src\Hazel\Application.h" />
+    <ClInclude Include="src\Hazel\Core.h" />
+    <ClInclude Include="src\Hazel\EntryPoint.h" />
     <ClInclude Include="src\Header.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Hazel\Application.cpp" />
     <ClCompile Include="src\Header.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
