@@ -26,7 +26,7 @@ namespace Hazel {
 
 	WindowsWindow::~WindowsWindow()
 	{
-
+		Shutdown();
 	}
 
 	void WindowsWindow::OnUpdate()
