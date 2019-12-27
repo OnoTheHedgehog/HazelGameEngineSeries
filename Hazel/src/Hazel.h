@@ -6,6 +6,9 @@
 #include "Hazel/Log.h"
 #include "Hazel/Layer.h"
 #include "Hazel/ImGui/ImGuiLayer.h"
+#include "Hazel/MouseButtonCodes.h"
+#include "Hazel/Input.h"
+#include "Hazel/KeyCodes.h"
 //Entry point
 #include "Hazel/EntryPoint.h"
 
