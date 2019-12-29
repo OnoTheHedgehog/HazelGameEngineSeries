@@ -50,7 +50,7 @@ namespace Hazel {
 	class HAZEL_API MouseButtonEvent : public Event
 	{
 	protected:
-		float m_Button;
+		int m_Button;
 
 		MouseButtonEvent(int button)
 			: m_Button(button) {}
