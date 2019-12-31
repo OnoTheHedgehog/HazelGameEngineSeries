@@ -73,8 +73,6 @@ namespace Hazel {
 
 		m_Context->Init();
 
-		m_Context->Init();
-		
 		glfwSetWindowUserPointer(m_Window, &m_Data);
 		SetVSync(true);
 
