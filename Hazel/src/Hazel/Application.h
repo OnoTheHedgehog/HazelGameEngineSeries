@@ -6,6 +6,7 @@
 #include <Hazel/Window.h>
 #include <Hazel/LayerStack.h>
 #include <Hazel/ImGui/ImGuiLayer.h>
+#include <Hazel\Renderer\Shader.h>
 
 namespace Hazel {
 	class HAZEL_API Application
@@ -30,6 +31,8 @@ namespace Hazel {
 		bool m_Running = true;
 		LayerStack m_LayerStack;
 		unsigned int m_VertexArray, m_VertexBuffer, m_IndexBuffer;
+
+		std::unique_ptr<Shader> m_Shader;
 	private:
 		static Application* s_Instance;
 	};
