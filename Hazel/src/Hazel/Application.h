@@ -4,10 +4,11 @@
 #include "Events/Event.h"
 #include "Events/ApplicationEvent.h"
 #include <Hazel/Window.h>
-#include <Hazel/LayerStack.h>
 #include <Hazel/ImGui/ImGuiLayer.h>
-#include <Hazel\Renderer\Shader.h>
-#include <Hazel\Renderer\Buffer.h>
+#include <Hazel/Renderer/Shader.h>
+#include <Hazel/Renderer/Buffer.h>
+#include <Hazel/Renderer/VertexArray.h>
+#include <Hazel\LayerStack.h>
 
 namespace Hazel {
 	class HAZEL_API Application
@@ -31,11 +32,12 @@ namespace Hazel {
 		ImGuiLayer* m_ImGuiLayer;
 		bool m_Running = true;
 		LayerStack m_LayerStack;
-		unsigned int m_VertexArray;
 
-		std::unique_ptr<Shader> m_Shader;
-		std::unique_ptr<VertexBuffer> m_VertexBuffer;
-		std::unique_ptr<IndexBuffer> m_IndexBuffer;
+		std::shared_ptr<Shader> m_Shader;
+		std::shared_ptr<VertexArray> m_VertexArray;
+
+		std::shared_ptr<VertexArray> m_SquareVertexArray;
+		std::shared_ptr<Shader> blueShader;
 	private:
 		static Application* s_Instance;
 	};
