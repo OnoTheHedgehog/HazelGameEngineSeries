@@ -4,7 +4,7 @@
 #include <Hazel\Events\ApplicationEvent.h>
 #include <Hazel\Log.h>
 
-#include <glad/glad.h>
+#include "Hazel/Renderer/Renderer.h"
 #include <Hazel/Input.h>
 
 namespace Hazel {
@@ -136,16 +136,20 @@ namespace Hazel {
 	{
 		while (m_Running)
 		{
-			glClearColor(0.2f, 0.2f, 0.2f, 1);
-			glClear(GL_COLOR_BUFFER_BIT);
+
+			RenderCommand::SetClearColor({ 0.2f, 0.2f, 0.2f, 1 });
+			RenderCommand::Clear();
+
+			Renderer::BeginScene();
+
 			blueShader->Bind();
-			m_SquareVertexArray->Bind();
-			glDrawElements(GL_TRIANGLES, m_SquareVertexArray->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
+			Renderer::Submit(m_SquareVertexArray);
 
 			m_Shader->Bind();
-			m_VertexArray->Bind();
+			Renderer::Submit(m_VertexArray);
 
-			glDrawElements(GL_TRIANGLES, m_VertexArray->GetIndexBuffer()->GetCount(), GL_UNSIGNED_INT, nullptr);
+			Renderer::EndScene();
+
 			for (Layer* layer : m_LayerStack)
 				layer->OnUpdate();
 

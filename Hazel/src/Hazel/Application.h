@@ -8,7 +8,7 @@
 #include <Hazel/Renderer/Shader.h>
 #include <Hazel/Renderer/Buffer.h>
 #include <Hazel/Renderer/VertexArray.h>
-#include <Hazel\LayerStack.h>
+#include <Hazel/LayerStack.h>
 
 namespace Hazel {
 	class HAZEL_API Application
