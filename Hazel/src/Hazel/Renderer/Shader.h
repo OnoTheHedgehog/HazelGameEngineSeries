@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <glm/glm.hpp>
 
 namespace Hazel {
 
@@ -9,7 +10,7 @@ namespace Hazel {
 	public:
 		Shader(const std::string& vertexSrc, const std::string& fragmanetSrc);
 		~Shader();
-
+		void SetMat4Uniform(const std::string& key, const glm::f32mat4& matix);
 		void Bind() const;
 		void Unbind() const;
 	private:

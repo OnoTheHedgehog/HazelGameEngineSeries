@@ -5,7 +5,11 @@
 #include <Hazel\Log.h>
 
 #include "Hazel/Renderer/Renderer.h"
+#include "Hazel/Renderer/Camera.h"
+
 #include <Hazel/Input.h>
+#include <glm\ext\matrix_transform.hpp>
+#include <imgui.h>
 
 namespace Hazel {
 
@@ -68,9 +72,28 @@ namespace Hazel {
 		std::shared_ptr<IndexBuffer> squareIB;
 		squareIB.reset(IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(uint32_t)));
 		m_SquareVertexArray->SetIndexBuffer(squareIB);
-
+		m_x = 0.0f;
 		std::string vertexSrc = R"(
 			#version 330 core
+			uniform mat4 uVPCamera;
+			
+			layout(location = 0) in vec3 a_Position;
+			layout(location = 1) in vec4 a_Color;
+
+			out vec3 v_Position;
+			out vec4 v_Color;
+
+			void main()
+			{
+				v_Position = a_Position;
+				v_Color = a_Color;
+				gl_Position = uVPCamera * vec4(a_Position, 1.0);
+			}
+		)";
+
+		/*std::string vertexSrc = R"(
+			#version 330 core
+			
 
 			layout(location = 0) in vec3 a_Position;
 			layout(location = 1) in vec4 a_Color;
@@ -84,7 +107,7 @@ namespace Hazel {
 				v_Color = a_Color;
 				gl_Position = vec4(a_Position, 1.0);
 			}
-		)";
+		)";*/
 
 		std::string fragmentSrc = R"(
 			#version 330 core
@@ -102,6 +125,7 @@ namespace Hazel {
 
 		std::string blueShaderVertexSrc = R"(
 			#version 330 core
+			uniform mat4 uVPCamera;
 
 			layout(location = 0) in vec3 a_Position;
 
@@ -110,8 +134,7 @@ namespace Hazel {
 			void main()
 			{
 				v_Position = a_Position;
-				gl_Position = vec4(a_Position, 1.0);
-			}
+				gl_Position = uVPCamera * vec4(a_Position, 1.0);			}
 		)";
 
 		std::string blueShaderFagmentSrc = R"(
@@ -134,19 +157,19 @@ namespace Hazel {
 
 	void Application::Run()
 	{
+		
 		while (m_Running)
 		{
 
 			RenderCommand::SetClearColor({ 0.2f, 0.2f, 0.2f, 1 });
 			RenderCommand::Clear();
+			m_Camera = std::make_shared<Camera>(Camera(glm::translate(glm::mat4(1.0f), glm::vec3(m_x, 0.0f, 0.9f)), glm::mat4(1.0f)));
 
-			Renderer::BeginScene();
+			Renderer::BeginScene(*m_Camera);
 
-			blueShader->Bind();
-			Renderer::Submit(m_SquareVertexArray);
+			Renderer::Submit(m_SquareVertexArray, blueShader);
 
-			m_Shader->Bind();
-			Renderer::Submit(m_VertexArray);
+			Renderer::Submit(m_VertexArray, m_Shader);
 
 			Renderer::EndScene();
 
@@ -156,6 +179,8 @@ namespace Hazel {
 			m_ImGuiLayer->Begin();
 			for (Layer* layer : m_LayerStack)
 				layer->OnImGuiRender();
+			ImGui::SliderFloat("float", &m_x, -1.0f, 1.0f);
+
 			m_ImGuiLayer->End();
 
 			m_Window->OnUpdate();

@@ -2,6 +2,7 @@
 #include "Shader.h"
 
 #include <glad/glad.h>
+#include <glm\gtc\type_ptr.hpp>
 
 namespace Hazel {
 	Shader::Shader(const std::string& vertexSrc, const std::string& fragmanetSrc)
@@ -117,6 +118,16 @@ namespace Hazel {
 	Shader::~Shader()
 	{
 		glDeleteProgram(m_RendererID);
+	}
+	void Shader::SetMat4Uniform(const std::string& key, const glm::f32mat4& matrix)
+	{
+		glUseProgram(m_RendererID);
+		GLuint MatrixID = glGetUniformLocation(m_RendererID, key.c_str());
+	
+		glUniformMatrix4fv(MatrixID, 1, GL_FALSE, glm::value_ptr(matrix));
+
+		//glUseProgram(0);
+
 	}
 	void Shader::Bind() const
 	{
