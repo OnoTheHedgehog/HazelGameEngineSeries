@@ -5,15 +5,13 @@
 #include "Events/ApplicationEvent.h"
 #include <Hazel/Window.h>
 #include <Hazel/ImGui/ImGuiLayer.h>
-#include <Hazel/Renderer/Shader.h>
-#include <Hazel/Renderer/Buffer.h>
-#include <Hazel/Renderer/VertexArray.h>
+
 #include <Hazel/LayerStack.h>
 
 
+
 namespace Hazel {
-	class Camera;
-	class HAZEL_API Application
+	class Application
 	{
 
 	public:
@@ -34,14 +32,6 @@ namespace Hazel {
 		ImGuiLayer* m_ImGuiLayer;
 		bool m_Running = true;
 		LayerStack m_LayerStack;
-		std::shared_ptr<Camera> m_Camera;
-
-		std::shared_ptr<Shader> m_Shader;
-		std::shared_ptr<VertexArray> m_VertexArray;
-
-		std::shared_ptr<VertexArray> m_SquareVertexArray;
-		std::shared_ptr<Shader> blueShader;
-		float m_x;
 	private:
 		static Application* s_Instance;
 	};
