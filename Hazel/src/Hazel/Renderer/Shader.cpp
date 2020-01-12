@@ -119,9 +119,8 @@ namespace Hazel {
 	{
 		glDeleteProgram(m_RendererID);
 	}
-	void Shader::SetMat4Uniform(const std::string& key, const glm::f32mat4& matrix)
+	void Shader::SetMat4Uniform(const std::string& key, const glm::mat4& matrix)
 	{
-		glUseProgram(m_RendererID);
 		GLuint MatrixID = glGetUniformLocation(m_RendererID, key.c_str());
 	
 		glUniformMatrix4fv(MatrixID, 1, GL_FALSE, glm::value_ptr(matrix));

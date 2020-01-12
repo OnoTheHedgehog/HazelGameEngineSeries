@@ -2,25 +2,24 @@
 #include "Renderer.h"
 
 namespace Hazel {
+	
+	Renderer::SceneData* Renderer::s_SceneData = new Renderer::SceneData;
 
-	Camera Renderer::m_SceneCamera = Camera();
-	void Renderer::BeginScene(Camera& camera)
+	void Renderer::BeginScene(OrthographicCamera& camera)
 	{
-		m_SceneCamera = camera;
+		s_SceneData->ViewProjectionMatrix = camera.GetViewProjectionMatrix();
 	}
 
 	void Renderer::EndScene()
 	{
 	}
 
-	void Renderer::Submit(const std::shared_ptr<VertexArray>& vertexAray, std::shared_ptr<Shader>& shader)
+	void Renderer::Submit(std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vertexAray)
 	{
 		shader->Bind();
-		shader->SetMat4Uniform("uVPCamera", m_SceneCamera.GetViewMatrix());
+		shader->SetMat4Uniform("uVPCamera", s_SceneData->ViewProjectionMatrix);
 		vertexAray->Bind();
 		RenderCommand::DrawIndexed(vertexAray);
-		shader->Unbind();
-		vertexAray->UnBind();
 	}
 
 }
