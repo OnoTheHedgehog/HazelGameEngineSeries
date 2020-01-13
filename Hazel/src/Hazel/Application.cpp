@@ -9,6 +9,7 @@
 #include <Hazel/Input.h>
 #include <glm\ext\matrix_transform.hpp>
 #include <imgui.h>
+#include <GLFW\glfw3.h>
 
 namespace Hazel {
 
@@ -37,9 +38,11 @@ namespace Hazel {
 		float x = 0.0f;
 		while (m_Running)
 		{
-			
+			float time = (float)glfwGetTime(); //Platform get time
+			Timestep timestep = time - m_LastFrameTime;
+			m_LastFrameTime = time;
 			for (Layer* layer : m_LayerStack)
-				layer->OnUpdate();
+				layer->OnUpdate(timestep);
 
 			m_ImGuiLayer->Begin();
 			for (Layer* layer : m_LayerStack)
