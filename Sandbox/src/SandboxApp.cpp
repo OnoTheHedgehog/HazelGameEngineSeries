@@ -1,6 +1,7 @@
 #include <Hazel.h>
 
 #include "imgui/imgui.h"
+#include <glm\gtc\matrix_transform.hpp>
 
 
 class ExampleLayer : public Hazel::Layer
@@ -36,10 +37,10 @@ public:
 		m_SquareVertexArray.reset(Hazel::VertexArray::Create());
 
 		float squareVertices[3 * 4] = {
-			-0.75f, -0.75f, 0.0f,
-			 0.75f, -0.75f, 0.0f,
-			 0.75f,  0.75f, 0.0f,
-			-0.75f,  0.75f, 0.0f
+			-0.5f, -0.5f, 0.0f,
+			 0.5f, -0.5f, 0.0f,
+			 0.5f,  0.5f, 0.0f,
+			-0.5f,  0.5f, 0.0f
 		};
 
 		std::shared_ptr<Hazel::VertexBuffer> squareVB;
@@ -57,6 +58,7 @@ public:
 		std::string vertexSrc = R"(
 			#version 330 core
 			uniform mat4 uVPCamera;
+			uniform mat4 u_Transform;
 			
 			layout(location = 0) in vec3 a_Position;
 			layout(location = 1) in vec4 a_Color;
@@ -68,7 +70,7 @@ public:
 			{
 				v_Position = a_Position;
 				v_Color = a_Color;
-				gl_Position = uVPCamera * vec4(a_Position, 1.0);
+				gl_Position = uVPCamera * u_Transform * vec4(a_Position, 1.0);
 			}
 		)";
 
@@ -89,6 +91,7 @@ public:
 		std::string blueShaderVertexSrc = R"(
 			#version 330 core
 			uniform mat4 uVPCamera;
+			uniform mat4 u_Transform;
 
 			layout(location = 0) in vec3 a_Position;
 
@@ -97,7 +100,7 @@ public:
 			void main()
 			{
 				v_Position = a_Position;
-				gl_Position = uVPCamera * vec4(a_Position, 1.0);			}
+				gl_Position = uVPCamera * u_Transform * vec4(a_Position, 1.0);			}
 		)";
 
 		std::string blueShaderFagmentSrc = R"(
@@ -137,8 +140,15 @@ public:
 		m_Camera.SetRotation(m_CameraRotation);
 		Hazel::Renderer::BeginScene(m_Camera);
 
-		Hazel::Renderer::Submit(blueShader, m_SquareVertexArray);
-		Hazel::Renderer::Submit(m_Shader, m_VertexArray);
+		
+		glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
+		for (size_t i = 0; i < 5; i++)
+		{
+			glm::vec3 pos(i * 0.11f, 0.0f, 0.0f);
+			glm::mat4 transform = glm::translate(glm::mat4(1.0f), pos) * scale;
+			Hazel::Renderer::Submit(blueShader, m_SquareVertexArray, transform);
+		}
+		//Hazel::Renderer::Submit(m_Shader, m_VertexArray);
 
 		Hazel::Renderer::EndScene();
 	}
@@ -161,6 +171,7 @@ private:
 	float m_CameraRotation = 0.0f;
 	float m_CameraMoveSpeed = 5.0f;
 	float m_CameraRotationSpeed = 180.0f;
+
 };
 
 class Sandbox : public Hazel::Application
