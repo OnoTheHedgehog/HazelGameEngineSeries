@@ -88,7 +88,7 @@ public:
 		)";
 		m_Shader.reset(new Hazel::Shader(vertexSrc, fragmentSrc));
 
-		std::string blueShaderVertexSrc = R"(
+		std::string flatColorShaderVertexSrc = R"(
 			#version 330 core
 			uniform mat4 uVPCamera;
 			uniform mat4 u_Transform;
@@ -103,18 +103,18 @@ public:
 				gl_Position = uVPCamera * u_Transform * vec4(a_Position, 1.0);			}
 		)";
 
-		std::string blueShaderFagmentSrc = R"(
+		std::string flatColorShaderFagmentSrc = R"(
 			#version 330 core
-
+			uniform vec4 u_Color;
 			layout(location = 0) out vec4 color;
 			in vec3 v_Position;
 
 			void main()
 			{
-				color = vec4(.2, 0.3, 0.8, 1.0);
+				color = u_Color;
 			}
 		)";
-		blueShader.reset(new Hazel::Shader(blueShaderVertexSrc, blueShaderFagmentSrc));
+		flatColorShader.reset(new Hazel::Shader(flatColorShaderVertexSrc, flatColorShaderFagmentSrc));
 
 	}
 
@@ -142,11 +142,21 @@ public:
 
 		
 		glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
-		for (size_t i = 0; i < 5; i++)
+
+		glm::vec4 redColor(0.8f, 0.2f, 0.3f, 1.0f);
+		glm::vec4 blueColor(0.2f, 0.3f, 0.8f, 1.0f);
+
+		for (size_t y = 0; y < 20; y++)
 		{
-			glm::vec3 pos(i * 0.11f, 0.0f, 0.0f);
-			glm::mat4 transform = glm::translate(glm::mat4(1.0f), pos) * scale;
-			Hazel::Renderer::Submit(blueShader, m_SquareVertexArray, transform);
+			for (size_t x = 0; x < 20; x++) {
+				glm::vec3 pos(x * 0.11f, y * 0.11f, 0.0f);
+				glm::mat4 transform = glm::translate(glm::mat4(1.0f), pos) * scale;
+				if (x % 2 == 0)
+					flatColorShader->SetVec4Uniform("u_Color", redColor);
+				else
+					flatColorShader->SetVec4Uniform("u_Color", blueColor);
+				Hazel::Renderer::Submit(flatColorShader, m_SquareVertexArray, transform);
+			}
 		}
 		//Hazel::Renderer::Submit(m_Shader, m_VertexArray);
 
@@ -166,7 +176,7 @@ private:
 	std::shared_ptr<Hazel::VertexArray> m_VertexArray;
 
 	std::shared_ptr<Hazel::VertexArray> m_SquareVertexArray;
-	std::shared_ptr<Hazel::Shader> blueShader;
+	std::shared_ptr<Hazel::Shader> flatColorShader;
 	glm::vec3 m_CameraPosition;
 	float m_CameraRotation = 0.0f;
 	float m_CameraMoveSpeed = 5.0f;

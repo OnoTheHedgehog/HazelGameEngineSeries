@@ -128,6 +128,17 @@ namespace Hazel {
 		//glUseProgram(0);
 
 	}
+
+	void Shader::SetVec4Uniform(const std::string& key, const glm::vec4& vec)
+	{
+		GLuint MatrixID = glGetUniformLocation(m_RendererID, key.c_str());
+
+		glUniform4fv(MatrixID, 1, glm::value_ptr(vec));
+
+		//glUseProgram(0);
+
+	}
+
 	void Shader::Bind() const
 	{
 		glUseProgram(m_RendererID);
