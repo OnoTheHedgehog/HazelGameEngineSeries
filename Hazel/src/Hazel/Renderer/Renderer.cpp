@@ -15,7 +15,7 @@ namespace Hazel {
 	{
 	}
 
-	void Renderer::Submit(std::shared_ptr<Shader>& shader, const std::shared_ptr<VertexArray>& vertexAray, const glm::mat4& transform)
+	void Renderer::Submit(Ref<Shader>& shader, const Ref<VertexArray>& vertexAray, const glm::mat4& transform)
 	{
 		shader->Bind();
 		std::dynamic_pointer_cast<OpenGLShader>(shader)->UploadUniformMat4("uVPCamera", s_SceneData->ViewProjectionMatrix);
