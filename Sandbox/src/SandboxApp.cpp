@@ -152,6 +152,7 @@ public:
 		textureShader = Hazel::Shader::Create(textureShaderVertexSrc, textureShaderFragmentSrc);
 
 		m_Texture = Hazel::Texture2D::Create("assets/textures/checkerboard.png");
+		gokuTexture = Hazel::Texture2D::Create("assets/textures/goku.png");
 
 		std::dynamic_pointer_cast<Hazel::OpenGLShader>(textureShader)->Bind();
 		std::dynamic_pointer_cast<Hazel::OpenGLShader>(textureShader)->UploadUniformInt("u_Texture", 0);
@@ -197,7 +198,8 @@ public:
 
 		m_Texture->Bind();
 		Hazel::Renderer::Submit(textureShader, m_SquareVertexArray, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
-
+		gokuTexture->Bind();
+		Hazel::Renderer::Submit(textureShader, m_SquareVertexArray, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
 		//Hazel::Renderer::Submit(m_Shader, m_VertexArray);
 
 		Hazel::Renderer::EndScene();
@@ -221,7 +223,7 @@ private:
 	Hazel::Ref<Hazel::VertexArray> m_SquareVertexArray;
 	Hazel::Ref<Hazel::Shader> flatColorShader, textureShader;
 
-	Hazel::Ref<Hazel::Texture2D> m_Texture;
+	Hazel::Ref<Hazel::Texture2D> m_Texture, gokuTexture;
 
 	glm::vec3 m_CameraPosition;
 	float m_CameraRotation = 0.0f;

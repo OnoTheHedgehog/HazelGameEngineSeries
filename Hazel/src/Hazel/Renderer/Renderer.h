@@ -17,6 +17,7 @@ namespace Hazel {
 
 		static SceneData* s_SceneData;
 	public:
+		static void Init();
 
 		static void BeginScene(OrthographicCamera& camera);
 		static void EndScene();
