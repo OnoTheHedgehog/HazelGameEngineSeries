@@ -13,5 +13,6 @@ namespace Hazel {
 		virtual void Unbind() const = 0;
 
 		static Ref<Shader> Create(const std::string& vertexSrc, const std::string& fragmanetSrc);
+		static Ref<Shader> Create(const std::string& filepath);
 	};
 }
