@@ -10,6 +10,7 @@
 #include <unordered_set>
 #include <unordered_map>
 #include <sstream>
+#include <array>
 #include <stdio.h>
 
 #include "Hazel/Log.h"
