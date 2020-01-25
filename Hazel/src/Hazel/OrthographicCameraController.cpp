@@ -15,9 +15,9 @@ namespace Hazel {
 	void OrthographicCameraController::OnUpdate(Timestep ts)
 	{
 		if (Input::IsKeyPressed(HZ_KEY_A))
-			m_CameraPosition.x += m_CameraTranslationSpeed * ts;
-		else if (Hazel::Input::IsKeyPressed(HZ_KEY_D))
 			m_CameraPosition.x -= m_CameraTranslationSpeed * ts;
+		else if (Hazel::Input::IsKeyPressed(HZ_KEY_D))
+			m_CameraPosition.x += m_CameraTranslationSpeed * ts;
 		if (Input::IsKeyPressed(HZ_KEY_W))
 			m_CameraPosition.y += m_CameraTranslationSpeed * ts;
 		else if (Input::IsKeyPressed(HZ_KEY_S))
@@ -32,6 +32,8 @@ namespace Hazel {
 
 		}
 		m_Camera.SetPosition(m_CameraPosition);
+
+		m_CameraTranslationSpeed = m_ZoomLevel;
 	}
 	void OrthographicCameraController::OnEvent(Event& e)
 	{
@@ -48,9 +50,9 @@ namespace Hazel {
 	}
 	bool OrthographicCameraController::OnWindowResized(WindowResizeEvent& e)
 	{
-		m_AspectRatio -= (float)e.GetWidth() / (float)e.GetHeight();
+		m_AspectRatio = (float)e.GetWidth() / (float)e.GetHeight();
 		m_Camera.SetProjection(-m_AspectRatio * m_ZoomLevel, m_AspectRatio * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel);
-
+		HZ_CORE_WARN("aspect Ratio: {0}, zoom level: {1}, width: {2}, height: {3}", m_AspectRatio, m_ZoomLevel, e.GetWidth(), e.GetHeight());
 		return false;
 	}
 }
