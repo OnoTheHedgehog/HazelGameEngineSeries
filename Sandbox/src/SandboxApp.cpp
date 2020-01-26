@@ -1,9 +1,9 @@
 #include <Hazel.h>
 
 #include "imgui/imgui.h"
-#include <glm\gtc\matrix_transform.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 #include <Plaform/OpenGL/OpenGLShader.h>
-#include <glm\gtc\type_ptr.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 
 

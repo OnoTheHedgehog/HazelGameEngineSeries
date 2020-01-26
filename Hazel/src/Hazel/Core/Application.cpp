@@ -1,15 +1,15 @@
 #include "hzpch.h"
 
 #include "Application.h"
-#include <Hazel\Events\ApplicationEvent.h>
-#include <Hazel\Log.h>
+#include <Hazel/Events/ApplicationEvent.h>
+#include <Hazel/Core/Log.h>
 
 #include "Hazel/Renderer/Renderer.h"
 
-#include <Hazel/Input.h>
-#include <glm\ext\matrix_transform.hpp>
+#include <Hazel/Core/Input.h>
+#include <glm/ext/matrix_transform.hpp>
 #include <imgui.h>
-#include <GLFW\glfw3.h>
+#include <GLFW/glfw3.h>
 
 namespace Hazel {
 

@@ -11,7 +11,7 @@
 
 #include "examples/imgui_impl_glfw.h"
 #include "examples/imgui_impl_opengl3.h"
-#include <Hazel\Application.h>
+#include <Hazel/Core/Application.h>
 
 
 namespace Hazel {
