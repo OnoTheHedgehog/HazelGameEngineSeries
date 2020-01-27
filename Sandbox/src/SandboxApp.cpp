@@ -1,9 +1,12 @@
-#include <Hazel.h>
+#include "Hazel.h"
+#include "Hazel/Core/EntryPoint.h"
+
 
 #include "imgui/imgui.h"
 #include <glm/gtc/matrix_transform.hpp>
 #include <Plaform/OpenGL/OpenGLShader.h>
 #include <glm/gtc/type_ptr.hpp>
+#include "Sandbox2D.h"
 
 
 
@@ -11,7 +14,7 @@ class ExampleLayer : public Hazel::Layer
 {
 public:
 	ExampleLayer()
-		: Layer("Example"), m_CameraController(1280.0f / 720.0f)
+		: Layer("Example"), m_CameraController(1280.0f / 720.0f, true)
 	{
 		m_VertexArray = Hazel::VertexArray::Create();
 
@@ -161,6 +164,7 @@ public:
 
 		Hazel::Renderer::EndScene();
 	}
+
 	void OnImGuiRender() override {
 		ImGui::Begin("Settings");
 		ImGui::ColorEdit3("Square Color", glm::value_ptr(m_SquareColor));
@@ -191,7 +195,8 @@ class Sandbox : public Hazel::Application
 public:
 	Sandbox()
 	{
-		PushLayer(new ExampleLayer());
+		//PushLayer(new ExampleLayer());
+		PushLayer(new Sandbox2D());
 	}
 
 	~Sandbox()
