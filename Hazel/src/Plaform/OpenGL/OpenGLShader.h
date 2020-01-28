@@ -3,6 +3,8 @@
 #include "Hazel/Renderer/Shader.h"
 #include <glm/glm.hpp>
 
+
+
 //TODO remove
 typedef unsigned int GLenum;
 
@@ -14,6 +16,12 @@ namespace Hazel {
 		OpenGLShader(const std::string& name, const std::string& vertexSrc, const std::string& fragmanetSrc);
 		OpenGLShader(const std::string& filepath);
 		virtual ~OpenGLShader();
+
+		virtual void SetFloat3(const std::string& name, const glm::vec3& vec) override;
+		virtual void SetFloat4(const std::string& name, const glm::vec4& vec) override;
+		virtual void SetMat4(const std::string& name, const glm::mat4& matrix) override;
+
+
 		void UploadUniformInt(const std::string& key, int value);
 
 		void UploadUniformFloat(const std::string& key, float value);

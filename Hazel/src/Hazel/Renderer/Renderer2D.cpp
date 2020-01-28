@@ -6,6 +6,8 @@
 #include "Shader.h"
 
 #include "Plaform/OpenGL/OpenGLShader.h"
+#include <glm/gtc/matrix_transform.hpp>
+
 #include "RenderCommand.h"
 
 namespace Hazel {
@@ -52,21 +54,25 @@ namespace Hazel {
 
 
 	void Renderer2D::BeginScene(const OrthographicCamera& camera){
-		std::dynamic_pointer_cast<OpenGLShader>(s_Data->FlatColorShader)->Bind();
-		std::dynamic_pointer_cast<OpenGLShader>(s_Data->FlatColorShader)->UploadUniformMat4("uVPCamera", camera.GetViewProjectionMatrix());
-		std::dynamic_pointer_cast<OpenGLShader>(s_Data->FlatColorShader)->UploadUniformMat4("u_Transform", glm::mat4(1.0f));
+		s_Data->FlatColorShader->Bind();
+		s_Data->FlatColorShader->SetMat4("uVPCamera", camera.GetViewProjectionMatrix());
 	}
 	void Renderer2D::EndScene(){
 
 	}
 
 	// Primitives
-	void Renderer2D::DrawQuad(const glm::vec2& position, const glm::vec2& size, const glm::vec4& color){
-		DrawQuad({position.x, position.y, 0.0f}, size, color);
+	void Renderer2D::DrawQuad(const glm::vec2& position, const glm::vec2& size, const glm::vec4& color, float angle = 0.0f){
+		DrawQuad({position.x, position.y, 0.0f}, size, color, angle);
 	}
-	void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, const glm::vec4& color){
-		std::dynamic_pointer_cast<OpenGLShader>(s_Data->FlatColorShader)->Bind();
-		std::dynamic_pointer_cast<OpenGLShader>(s_Data->FlatColorShader)->UploadUniformFloat4("u_Color", color);
+	void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, const glm::vec4& color, float angle = 0.0f){
+		s_Data->FlatColorShader->Bind();
+		s_Data->FlatColorShader->SetFloat4("u_Color", color);
+
+		glm::mat4 transform = glm::translate(glm::mat4(1.0), position) * glm::rotate(glm::mat4(1.0f), glm::radians(angle), glm::vec3{ 0, 0, 1 }) *
+			glm::scale(glm::mat4(1.0), { size.x, size.y, 1.0f });
+
+		s_Data->FlatColorShader->SetMat4("u_Transform", transform);
 
 		s_Data->QuadVertexArray->Bind();
 		RenderCommand::DrawIndexed(s_Data->QuadVertexArray);
