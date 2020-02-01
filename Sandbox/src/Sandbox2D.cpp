@@ -20,6 +20,7 @@ void Sandbox2D::OnUpdate(Hazel::Timestep ts) {
 
 	Hazel::Renderer2D::DrawQuad({ -1.0f, 0.0f }, { 0.8f, 0.8f }, { m_SquareColor.r, m_SquareColor.b, 0.5f, 1.0f }, 45.0f);
 	Hazel::Renderer2D::DrawQuad({ 0.5f, -0.5f }, { 0.5f, 0.75f }, { m_SquareColor.r, m_SquareColor.b, 0.3f, 1.0f }, 30.0f);
+	Hazel::Renderer2D::DrawQuad({ 0.2f,  0.5f, -0.1f }, { 6.5f, 6.75f }, m_CheckerboardTexture, 30.0f);
 
 	Hazel::Renderer2D::EndScene();
 
@@ -34,6 +35,7 @@ void Sandbox2D::OnImGuiRender() {
 }
 
 void Sandbox2D::OnAttach() {
+	m_CheckerboardTexture = Hazel::Texture2D::Create("assets/textures/checkerboard.png");
 
 	
 }
