@@ -3,13 +3,14 @@
 
 layout(location = 0) out vec4 color;
 
+uniform vec4 u_Color;
 uniform sampler2D u_Texture;
 
 in vec2 v_TextCoord;
 
 void main()
 {
-	color = texture(u_Texture, v_TextCoord);
+	color = texture(u_Texture, v_TextCoord) * u_Color;
 }
 
 #type vertex
