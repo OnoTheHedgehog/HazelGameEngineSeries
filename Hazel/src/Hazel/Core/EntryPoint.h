@@ -6,15 +6,15 @@
 extern Hazel::Application* Hazel::CreateApplication();
 
 	int main(int argc, char** argv) {
-		printf("Hazel Engine!");
-
 		Hazel::Log::Init();
-		HZ_CORE_WARN("Initialised Log");
-		int a = 5;
-		HZ_INFO("Hello! Var{0}", a);
+		HZ_PROFILE_BEGIN_SESSION("Startup", "HazelProfile-Startup.json");
 		auto app = Hazel::CreateApplication();
+		HZ_PROFILE_END_SESSION();
+		HZ_PROFILE_BEGIN_SESSION("Startup", "HazelProfile-Runtime.json");
 		app->Run();
+		HZ_PROFILE_END_SESSION();
+		HZ_PROFILE_BEGIN_SESSION("Shutdown", "HazelProfile-Shutdown.json");
 		delete app;
-		return 0;
+		HZ_PROFILE_END_SESSION();
 	}
 #endif
