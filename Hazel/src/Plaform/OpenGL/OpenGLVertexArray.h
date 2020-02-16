@@ -8,6 +8,9 @@ namespace Hazel {
 	public:
 		virtual void AddVertexBuffer(const Ref<VertexBuffer>& vertexBuffer) override;
 		virtual void SetIndexBuffer(const Ref<IndexBuffer>& indexBuffer) override;
+		// Inherited via VertexArray
+		virtual const std::vector<Ref<VertexBuffer>>& GetVertexBuffers() const override;
+		virtual const Ref<IndexBuffer>& GetIndexBuffer() const override;
 		virtual void Bind() const override;
 		virtual void UnBind() const override;
 
@@ -17,10 +20,9 @@ namespace Hazel {
 		std::vector<Ref<VertexBuffer>> m_vertexBuffers;
 		Ref<IndexBuffer> m_IndexBuffer;
 		uint32_t m_RendererID;
+		uint32_t m_VertexBufferIndex = 0;
 
-		// Inherited via VertexArray
-		virtual const std::vector<Ref<VertexBuffer>>& GetVertexBuffers() const override;
-		virtual const Ref<IndexBuffer>& GetIndexBuffer() const override;
+		
 	};
 
 }

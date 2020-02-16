@@ -1,9 +1,6 @@
 #include "hzpch.h"
-#include "LayerStack.h"
+#include "Hazel/Core/LayerStack.h"
 
-Hazel::LayerStack::LayerStack()
-{
-}
 
 Hazel::LayerStack::~LayerStack()
 {

@@ -3,7 +3,7 @@
 #include "Event.h"
 
 namespace Hazel {
-	class HAZEL_API MouseMovedEvent : public Event
+	class MouseMovedEvent : public Event
 	{
 	private:
 		float m_MouseX, m_MouseY;
@@ -25,7 +25,7 @@ namespace Hazel {
 		EVENT_CLASS_CATEGORY(EventCategoryMouse | EventCategoryInput)
 	};
 
-	class HAZEL_API MouseScrolledEvent : public Event
+	class MouseScrolledEvent : public Event
 	{
 	private:
 		float m_XOffset, m_YOffset;
@@ -47,7 +47,7 @@ namespace Hazel {
 		EVENT_CLASS_CATEGORY(EventCategoryMouse | EventCategoryInput)
 	};
 
-	class HAZEL_API MouseButtonEvent : public Event
+	class MouseButtonEvent : public Event
 	{
 	protected:
 		int m_Button;
@@ -61,7 +61,7 @@ namespace Hazel {
 		EVENT_CLASS_CATEGORY(EventCategoryMouse | EventCategoryInput)
 	};
 
-	class HAZEL_API MouseButtonPressedEvent : public MouseButtonEvent
+	class MouseButtonPressedEvent : public MouseButtonEvent
 	{
 	public:
 		MouseButtonPressedEvent(int button)
@@ -78,7 +78,7 @@ namespace Hazel {
 
 	};
 
-	class HAZEL_API MouseButtonReleasedEvent : public MouseButtonEvent
+	class MouseButtonReleasedEvent : public MouseButtonEvent
 	{
 	public:
 		MouseButtonReleasedEvent(int button)

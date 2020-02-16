@@ -1,7 +1,7 @@
 #include "hzpch.h"
-#include "VertexArray.h"
+#include "Hazel/Renderer/Shader.h"
+#include "Hazel/Renderer/Renderer.h"
 #include "Plaform/OpenGL/OpenGLShader.h"
-#include "Renderer.h"
 
 namespace Hazel {
 	Ref<Shader> Shader::Create(const std::string& name, const std::string& vertexSrc, const std::string& fragmanetSrc)
@@ -9,7 +9,7 @@ namespace Hazel {
 		switch (Renderer::GetAPI())
 		{
 			case RendererAPI::API::None: HZ_CORE_ASSERT(false, "RendererAPI::None is currently not supported!"); return nullptr;
-			case RendererAPI::API::OpenGL: return std::make_shared<OpenGLShader>(name, vertexSrc, fragmanetSrc);
+			case RendererAPI::API::OpenGL:  return CreateRef<OpenGLShader>(name, vertexSrc, fragmanetSrc);
 		}
 		HZ_CORE_ASSERT(false, "Unknown RendererAPI!");
 		return nullptr;
@@ -19,7 +19,7 @@ namespace Hazel {
 		switch (Renderer::GetAPI())
 		{
 			case RendererAPI::API::None: HZ_CORE_ASSERT(false, "RendererAPI::None is currently not supported!"); return nullptr;
-			case RendererAPI::API::OpenGL: return std::make_shared<OpenGLShader>(filepath);
+			case RendererAPI::API::OpenGL:  return CreateRef<OpenGLShader>(filepath);
 		}
 		HZ_CORE_ASSERT(false, "Unknown RendererAPI!");
 		return nullptr;

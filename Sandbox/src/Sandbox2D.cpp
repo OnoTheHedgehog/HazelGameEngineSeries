@@ -1,8 +1,7 @@
 #include "Sandbox2D.h"
-#include "imgui/imgui.h"
+#include <imgui/imgui.h>
 #include <glm/gtc/type_ptr.hpp>
 
-#include <Plaform/OpenGL/OpenGLShader.h>
 
 #include <chrono>
 

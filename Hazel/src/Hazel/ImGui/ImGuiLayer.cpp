@@ -1,5 +1,5 @@
 #include "hzpch.h"
-#include "ImGuiLayer.h"
+#include "Hazel/ImGui/ImGuiLayer.h"
 
 #include <GLFW\glfw3.h>
 
@@ -7,10 +7,9 @@
 //Temporary
 #include <glad/glad.h>
 
-#include "imgui.h"
-
-#include "examples/imgui_impl_glfw.h"
-#include "examples/imgui_impl_opengl3.h"
+#include <imgui.h>
+#include <examples/imgui_impl_glfw.h>
+#include <examples/imgui_impl_opengl3.h>
 #include <Hazel/Core/Application.h>
 
 
@@ -49,7 +48,7 @@ namespace Hazel {
 			style.Colors[ImGuiCol_WindowBg].w = 1.0f;
 		}
 
-		// Setup Platform/Renderer bindings
+		// Setup Plaform/Renderer bindings
 		Application& app = Application::Get();
 		GLFWwindow* window = static_cast<GLFWwindow*>(app.getWindow().GetNativeWindow());
 		ImGui_ImplGlfw_InitForOpenGL(window, true);
