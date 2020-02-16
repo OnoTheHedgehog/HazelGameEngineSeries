@@ -11,6 +11,8 @@ void Hazel::OpenGLRendererAPI::Clear()
 
 void Hazel::OpenGLRendererAPI::Init()
 {
+	HZ_PROFILE_FUNCTION();
+
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_DEPTH_TEST);

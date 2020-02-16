@@ -23,11 +23,10 @@ namespace Hazel {
 
 	void Renderer2D::Init() {
 
+		HZ_PROFILE_FUNCTION();
 
 		s_Data =  new Renderer2DStorage();
-
 		s_Data->QuadVertexArray = VertexArray::Create();
-
 		float squareVertices[5 * 4] = {
 			-0.5f, -0.5f, 0.0f, 0.0f, 0.0f,
 			 0.5f, -0.5f, 0.0f, 1.0f, 0.0f,
@@ -56,23 +55,29 @@ namespace Hazel {
 		s_Data->TextureShader->SetInt("u_Texture", 0);
 	}
 	void Renderer2D::Shutdown(){
+		HZ_PROFILE_FUNCTION();
+
 		delete s_Data;
 	}
 
 
 	void Renderer2D::BeginScene(const OrthographicCamera& camera){
+		HZ_PROFILE_FUNCTION();
+
 		s_Data->TextureShader->Bind();
 		s_Data->TextureShader->SetMat4("uVPCamera", camera.GetViewProjectionMatrix());
 	}
 	void Renderer2D::EndScene(){
-
+		HZ_PROFILE_FUNCTION();
 	}
 
 	// Primitives
 	void Renderer2D::DrawQuad(const glm::vec2& position, const glm::vec2& size, const glm::vec4& color, float angle){
+		HZ_PROFILE_FUNCTION();
 		DrawQuad({position.x, position.y, 0.0f}, size, color, angle);
 	}
 	void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, const glm::vec4& color, float angle){
+		HZ_PROFILE_FUNCTION();
 		s_Data->TextureShader->SetFloat4("u_Color", color);
 		s_Data->WhiteTexture->Bind();
 		glm::mat4 transform = glm::translate(glm::mat4(1.0), position) * glm::rotate(glm::mat4(1.0f), glm::radians(angle), glm::vec3{ 0, 0, 1 }) *
@@ -84,10 +89,12 @@ namespace Hazel {
 		RenderCommand::DrawIndexed(s_Data->QuadVertexArray);
 	}
 	void Renderer2D::DrawQuad(const glm::vec2& position, const glm::vec2& size, const Ref<Texture2D>& texture, float angle) {
+		HZ_PROFILE_FUNCTION();
 		DrawQuad({ position.x, position.y, 0.0f }, size, texture, angle);
 
 	}
 	void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& size, const Ref<Texture2D>& texture, float angle) {
+		HZ_PROFILE_FUNCTION();
 		s_Data->TextureShader->SetFloat4("u_Color", { 1.0f, 1.0f, 1.0f, 1.0f });
 
 		texture->Bind();

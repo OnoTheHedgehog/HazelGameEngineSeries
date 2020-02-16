@@ -1,14 +1,13 @@
 #include "hzpch.h"
 
 #include "Application.h"
-#include <Hazel/Events/ApplicationEvent.h>
+
 #include <Hazel/Core/Log.h>
 
 #include "Hazel/Renderer/Renderer.h"
 
 #include <Hazel/Core/Input.h>
-#include <glm/ext/matrix_transform.hpp>
-#include <imgui.h>
+
 #include <GLFW/glfw3.h>
 
 namespace Hazel {
@@ -19,6 +18,7 @@ namespace Hazel {
 	
 	Application::Application()
 	{
+		HZ_PROFILE_FUNCTION();
 		HZ_CORE_ASSERT(!s_Instance, "Application already exists");
 		s_Instance = this;
 		m_Window = std::unique_ptr<Window>(Window::Create());
@@ -32,33 +32,45 @@ namespace Hazel {
 
 	Application::~Application()
 	{
+		HZ_PROFILE_FUNCTION();
+
+		Renderer::Shutdown();
 	}
 
 	void Application::Run()
 	{
-		float x = 0.0f;
+		HZ_PROFILE_FUNCTION();
+
 		while (m_Running)
 		{
+			HZ_PROFILE_SCOPE("RunLoop");
 			float time = (float)glfwGetTime(); //Platform get time
 			Timestep timestep = time - m_LastFrameTime;
 			m_LastFrameTime = time;
 			if (!m_Minimized)
 			{
-				for (Layer* layer : m_LayerStack)
-					layer->OnUpdate(timestep);
-			}
-			m_ImGuiLayer->Begin();
-			for (Layer* layer : m_LayerStack)
-				layer->OnImGuiRender();
-			m_ImGuiLayer->End();
+				{
+					HZ_PROFILE_SCOPE("Layer OnUpdate");
+					for (Layer* layer : m_LayerStack)
+						layer->OnUpdate(timestep);
+				}
 
+				m_ImGuiLayer->Begin();
+				{
+					HZ_PROFILE_SCOPE("Layer OnImGuiRender");
+					for (Layer* layer : m_LayerStack)
+						layer->OnImGuiRender();
+				}
+				m_ImGuiLayer->End();
+			}
 			m_Window->OnUpdate();
-			x += 2.0f;
 		}
 	}
 
 	void Application::OnEvent(Event& e)
 	{
+		HZ_PROFILE_FUNCTION();
+
 		EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(OnWindowClose));
 		dispatcher.Dispatch<WindowResizeEvent>(BIND_EVENT_FN(OnWindowResize));
@@ -73,12 +85,16 @@ namespace Hazel {
 
 	void Application::PushLayer(Layer* layer)
 	{
+		HZ_PROFILE_FUNCTION();
+
 		m_LayerStack.PushLayer(layer);
 		layer->OnAttach();
 	}
 
 	void Application::PushOverlay(Layer* overlay)
 	{
+		HZ_PROFILE_FUNCTION();
+
 		m_LayerStack.PushLayer(overlay);
 		overlay->OnAttach();
 
@@ -92,6 +108,8 @@ namespace Hazel {
 
 	bool Application::OnWindowResize(WindowResizeEvent& e)
 	{
+		HZ_PROFILE_FUNCTION();
+
 		if (e.GetWidth() == 0 || e.GetHeight() == 0)
 		{
 			m_Minimized = true;

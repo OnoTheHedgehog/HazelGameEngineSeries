@@ -14,11 +14,9 @@ Sandbox2D::Sandbox2D()
 
 void Sandbox2D::OnUpdate(Hazel::Timestep ts) {
 
-	HZ_PROFILE_FUNCTION("Sandbox2D::OnUpdate");
-	{
-		HZ_PROFILE_SCOPE("CameraController::OnUpdate");
-		m_CameraController.OnUpdate(ts);
-	}
+	HZ_PROFILE_FUNCTION();
+	m_CameraController.OnUpdate(ts);
+	
 	{
 		HZ_PROFILE_SCOPE("Renderer Prep");
 
@@ -42,6 +40,8 @@ void Sandbox2D::OnUpdate(Hazel::Timestep ts) {
 
 }
 void Sandbox2D::OnImGuiRender() {
+	HZ_PROFILE_FUNCTION();
+
 	ImGui::Begin("Settings");
 	ImGui::ColorEdit4("Square Color", glm::value_ptr(m_SquareColor));
 
@@ -50,15 +50,20 @@ void Sandbox2D::OnImGuiRender() {
 }
 
 void Sandbox2D::OnAttach() {
+	HZ_PROFILE_FUNCTION();
+
 	m_CheckerboardTexture = Hazel::Texture2D::Create("assets/textures/checkerboard.png");
 
 	
 }
 
 void Sandbox2D::OnDetach(){
-	
+	HZ_PROFILE_FUNCTION();
+
 }
 
 void Sandbox2D::OnEvent(Hazel::Event& e) {
+	HZ_PROFILE_FUNCTION();
+
 	m_CameraController.OnEvent(e);
 }

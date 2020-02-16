@@ -9,10 +9,15 @@ namespace Hazel {
 
 	void Renderer::Init()
 	{
+		HZ_PROFILE_FUNCTION();
+
 		RenderCommand::Init();
 		Renderer2D::Init();
 	}
-
+	void Renderer::Shutdown()
+	{
+		Renderer2D::Shutdown();
+	}
 	void Renderer::OnWindowResize(uint32_t width, uint32_t height)
 	{
 		RenderCommand::SetViewPort(0, 0, width, height);
@@ -30,8 +35,8 @@ namespace Hazel {
 	void Renderer::Submit(Ref<Shader>& shader, const Ref<VertexArray>& vertexAray, const glm::mat4& transform)
 	{
 		shader->Bind();
-		std::dynamic_pointer_cast<OpenGLShader>(shader)->UploadUniformMat4("uVPCamera", s_SceneData->ViewProjectionMatrix);
-		std::dynamic_pointer_cast<OpenGLShader>(shader)->UploadUniformMat4("u_Transform", transform);
+		shader->SetMat4("uVPCamera", s_SceneData->ViewProjectionMatrix);
+		shader->SetMat4("u_Transform", transform);
 		vertexAray->Bind();
 		RenderCommand::DrawIndexed(vertexAray);
 	}
